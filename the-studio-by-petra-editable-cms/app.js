@@ -31,7 +31,7 @@ function setTheme(site) {
 
   root.setProperty(
     "--display",
-    `"${fonts.display || "DM Serif Display"}"`
+    `"${fonts.display || "Bodoni Moda"}"`
   );
 
   root.setProperty(
@@ -45,7 +45,12 @@ function menu(siteTitle = "The Studio by Petra") {
     <div class="menu" id="menu">
       <div class="menu-top">
         <a class="brand" href="/">${siteTitle}</a>
-        <button class="close" onclick="toggleMenu()" aria-label="Close menu">
+
+        <button
+          class="close"
+          onclick="toggleMenu()"
+          aria-label="Close menu"
+        >
           ×
         </button>
       </div>
@@ -97,6 +102,158 @@ async function loadSite() {
   ]);
 }
 
+
+/* =========================================
+   CONTACT ICONS
+   ========================================= */
+
+function contactIcons(site) {
+  const email =
+    site.email || "petra.moreno8@gmail.com";
+
+  const instagram =
+    site.instagram ||
+    "https://www.instagram.com/petramoreeno/";
+
+  const linkedin =
+    site.linkedin ||
+    "https://www.linkedin.com/in/petra-moreno-33b009131/";
+
+  return `
+    <div
+      class="contact-links"
+      aria-label="Contact links"
+    >
+
+      <!-- EMAIL -->
+
+      <a
+        class="contact-icon"
+        href="mailto:${email}"
+        aria-label="Email Petra"
+        title="Email"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <rect
+            x="3"
+            y="5"
+            width="18"
+            height="14"
+            rx="1"
+          ></rect>
+
+          <path
+            d="M4 7l8 6 8-6"
+          ></path>
+        </svg>
+
+      </a>
+
+
+      <!-- INSTAGRAM -->
+
+      <a
+        class="contact-icon"
+        href="${instagram}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Petra on Instagram"
+        title="Instagram"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <rect
+            x="3"
+            y="3"
+            width="18"
+            height="18"
+            rx="5"
+          ></rect>
+
+          <circle
+            cx="12"
+            cy="12"
+            r="4"
+          ></circle>
+
+          <circle
+            class="svg-fill"
+            cx="17.4"
+            cy="6.7"
+            r="1"
+          ></circle>
+        </svg>
+
+      </a>
+
+
+      <!-- LINKEDIN -->
+
+      <a
+        class="contact-icon"
+        href="${linkedin}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Petra on LinkedIn"
+        title="LinkedIn"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+
+          <rect
+            x="3"
+            y="3"
+            width="18"
+            height="18"
+            rx="2"
+          ></rect>
+
+          <path
+            d="M7.5 10v7"
+          ></path>
+
+          <path
+            d="M7.5 7.4v.1"
+          ></path>
+
+          <path
+            d="M11 10v7"
+          ></path>
+
+          <path
+            d="M11 13
+               c0-2
+               1.1-3.2
+               2.8-3.2
+               1.8 0
+               2.7 1.2
+               2.7 3.2
+               V17"
+          ></path>
+
+        </svg>
+
+      </a>
+
+    </div>
+  `;
+}
+
+
+/* =========================================
+   HOME PAGE
+   ========================================= */
+
 async function home() {
   const [site, projects] = await Promise.all([
     loadSite(),
@@ -104,25 +261,41 @@ async function home() {
   ]);
 
   setTheme(site);
-  document.title = site.siteTitle || "The Studio by Petra";
+
+  document.title =
+    site.siteTitle || "The Studio by Petra";
 
   const featuredProjects = projects.filter(
     (project) => project.featured !== false
   );
 
   $("#app").innerHTML = `
+
     ${menu(site.siteTitle)}
 
-    <header class="hero" id="home">
+    <!-- HERO -->
+
+    <header
+      class="hero"
+      id="home"
+    >
+
       <div
         class="hero-media"
-        style="background-image: url('${site.images?.hero || ""}')"
+        style="
+          background-image:
+          url('${site.images?.hero || ""}')
+        "
       ></div>
 
       <div class="hero-shade"></div>
 
       <div class="topbar">
-        <a class="brand" href="#home">
+
+        <a
+          class="brand"
+          href="#home"
+        >
           ${site.siteTitle || "The Studio by Petra"}
         </a>
 
@@ -131,18 +304,38 @@ async function home() {
           onclick="toggleMenu()"
           aria-label="Open menu"
         ></button>
+
       </div>
+
 
       <div class="hero-copy">
-        <h1>${site.heroTitle || "The studio."}</h1>
-        <p>${site.heroSubtitle || "by Petra"}</p>
+
+        <h1>
+          ${site.heroTitle || "The studio."}
+        </h1>
+
+        <p>
+          ${site.heroSubtitle || "by Petra"}
+        </p>
+
       </div>
+
     </header>
 
-    <section class="section mustard statement-section">
+
+    <!-- STATEMENT -->
+
+    <section
+      class="section mustard statement-section"
+    >
+
       <div class="wrap center">
+
         <h2 class="statement">
-          ${site.statement || "We are all creatives, and this is."}
+          ${
+            site.statement ||
+            "We are all creatives, and this is."
+          }
         </h2>
 
         <div class="services">
@@ -151,62 +344,108 @@ async function home() {
             "Communication Strategy | Brand Identity | Social Media Management | Community Management"
           }
         </div>
+
       </div>
+
     </section>
 
-    <section class="section cream" id="projects">
+
+    <!-- PROJECTS -->
+
+    <section
+      class="section cream"
+      id="projects"
+    >
+
       <div class="wrap">
+
         <div class="eyebrow">
-          ${site.projectsHeading || "CONCEPT PROJECTS"}
+          ${
+            site.projectsHeading ||
+            "CONCEPT PROJECTS"
+          }
         </div>
+
 
         <div class="lead">
           ${site.projectsIntro || ""}
         </div>
 
+
         <div class="bodycopy">
           ${site.projectsBody || ""}
         </div>
 
+
         <div class="projects-grid">
+
           ${featuredProjects
             .map(
               (project) => `
+
                 <a
                   class="project-card"
                   href="/?project=${project.slug}"
-                  style="background-image: url('${project.cover || ""}')"
+                  style="
+                    background-image:
+                    url('${project.cover || ""}')
+                  "
                 >
-                  <div class="project-card-overlay"></div>
+
+                  <div
+                    class="project-card-overlay"
+                  ></div>
+
 
                   <div class="label">
+
                     ${project.title}
 
                     <span class="category">
                       ${project.category || ""}
                     </span>
+
                   </div>
+
                 </a>
+
               `
             )
             .join("")}
+
         </div>
+
       </div>
+
     </section>
 
-    <section class="section cream" id="about">
+
+    <!-- ABOUT -->
+
+    <section
+      class="section cream"
+      id="about"
+    >
+
       <div class="wrap">
+
         <div class="eyebrow">
-          ${site.aboutHeading || "ABOUT ME"}
+          ${
+            site.aboutHeading ||
+            "ABOUT ME"
+          }
         </div>
+
 
         <div class="lead">
           ${site.aboutLead || ""}
         </div>
 
+
         <div class="bodycopy">
           ${site.aboutBody || ""}
         </div>
+
 
         ${
           site.images?.about
@@ -219,38 +458,36 @@ async function home() {
             `
             : ""
         }
+
       </div>
+
     </section>
 
-    <section class="section mustard" id="contact">
+
+    <!-- CONTACT -->
+
+    <section
+      class="section mustard"
+      id="contact"
+    >
+
       <div class="wrap">
+
         <div class="eyebrow">
-          ${site.contactHeading || "CONTACT ME"}
+          ${
+            site.contactHeading ||
+            "CONTACT ME"
+          }
         </div>
+
 
         <div class="lead">
           ${site.contactText || ""}
         </div>
 
-        <div class="contact-links">
-          ${
-            site.email
-              ? `<a class="pill" href="mailto:${site.email}">Email</a>`
-              : ""
-          }
 
-          ${
-            site.instagram
-              ? `<a class="pill" href="${site.instagram}" target="_blank">Instagram</a>`
-              : ""
-          }
+        ${contactIcons(site)}
 
-          ${
-            site.linkedin
-              ? `<a class="pill" href="${site.linkedin}" target="_blank">LinkedIn</a>`
-              : ""
-          }
-        </div>
 
         ${
           site.images?.contact
@@ -263,26 +500,50 @@ async function home() {
             `
             : ""
         }
+
       </div>
+
     </section>
 
+
+    <!-- FOOTER -->
+
     <footer class="footer cream">
+
       <div class="wrap footer-row">
+
         <div class="footer-brand">
-          <span class="footer-logo">The Studio</span>
-          <span>by Petra</span>
+
+          <span class="footer-logo">
+            The Studio
+          </span>
+
+          <span>
+            by Petra
+          </span>
+
         </div>
 
+
         <div>
+
           ${
             site.copyright ||
             "© 2026 Petra Moreno. All Rights Reserved."
           }
+
         </div>
+
       </div>
+
     </footer>
   `;
 }
+
+
+/* =========================================
+   PROJECT PAGE
+   ========================================= */
 
 async function project(slug) {
   const [site, project] = await Promise.all([
@@ -292,44 +553,71 @@ async function project(slug) {
 
   setTheme(site);
 
-  document.title = `${project.title} — ${
-    site.siteTitle || "The Studio by Petra"
-  }`;
+  document.title =
+    `${project.title} — ${
+      site.siteTitle || "The Studio by Petra"
+    }`;
+
 
   $("#app").innerHTML = `
+
     ${menu(site.siteTitle)}
 
+
+    <!-- PROJECT TOP BAR -->
+
     <header class="case-topbar">
-      <a class="brand" href="/">
+
+      <a
+        class="brand"
+        href="/"
+      >
         ${site.siteTitle || "The Studio by Petra"}
       </a>
+
 
       <button
         class="hamb"
         onclick="toggleMenu()"
         aria-label="Open menu"
       ></button>
+
     </header>
 
+
+    <!-- PROJECT CONTENT -->
+
     <main class="case-study">
+
+
+      <!-- PROJECT HERO -->
+
       <section class="case-hero cream">
+
         <div class="wrap">
 
-          <a class="back" href="/#projects">
+          <a
+            class="back"
+            href="/#projects"
+          >
             ← Back to projects
           </a>
+
 
           <div class="case-category">
             ${project.category || ""}
           </div>
 
+
           <h1 class="case-title">
             ${project.title}
           </h1>
 
+
           <div class="case-intro">
             ${project.intro || ""}
           </div>
+
 
           ${
             project.cover
@@ -342,26 +630,45 @@ async function project(slug) {
               `
               : ""
           }
+
         </div>
+
       </section>
+
+
+      <!-- PROJECT SECTIONS -->
 
       ${(project.sections || [])
         .map(
           (section, index) => `
+
             <section
-              class="case-section ${
-                index % 2 === 0 ? "cream" : "mustard"
-              }"
+              class="
+                case-section
+                ${
+                  index % 2 === 0
+                    ? "cream"
+                    : "mustard"
+                }
+              "
             >
-              <div class="wrap case-section-inner">
+
+              <div
+                class="wrap case-section-inner"
+              >
 
                 <h2>
                   ${section.heading || ""}
                 </h2>
 
-                <div class="bodycopy case-text">
-                  ${(section.text || "").replace(/\n/g, "<br>")}
+
+                <div
+                  class="bodycopy case-text"
+                >
+                  ${(section.text || "")
+                    .replace(/\n/g, "<br>")}
                 </div>
+
 
                 ${
                   section.image
@@ -369,51 +676,90 @@ async function project(slug) {
                       <img
                         class="case-section-image"
                         src="${section.image}"
-                        alt="${section.heading || project.title}"
+                        alt="${
+                          section.heading ||
+                          project.title
+                        }"
                       >
                     `
                     : ""
                 }
 
               </div>
+
             </section>
+
           `
         )
         .join("")}
+
     </main>
 
+
+    <!-- PROJECT FOOTER -->
+
     <footer class="footer cream">
+
       <div class="wrap footer-row">
+
         <div class="footer-brand">
-          <span class="footer-logo">The Studio</span>
-          <span>by Petra</span>
+
+          <span class="footer-logo">
+            The Studio
+          </span>
+
+          <span>
+            by Petra
+          </span>
+
         </div>
+
 
         <a href="/#projects">
           Explore more projects →
         </a>
+
       </div>
+
     </footer>
   `;
 }
 
+
+/* =========================================
+   START WEBSITE
+   ========================================= */
+
 async function start() {
-  const query = new URLSearchParams(window.location.search);
-  const slug = query.get("project");
+  const query =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const slug =
+    query.get("project");
 
   try {
+
     if (slug) {
       await project(slug);
     } else {
       await home();
     }
+
   } catch (error) {
+
     console.error(error);
 
     $("#app").innerHTML = `
+
       <div class="loading">
-        Something went wrong loading The Studio by Petra.
+
+        Something went wrong loading
+        The Studio by Petra.
+
       </div>
+
     `;
   }
 }
