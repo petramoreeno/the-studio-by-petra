@@ -5,7 +5,7 @@ backend:
   base_url: https://mute-sunset-c3dcthe-studio-by-petra-auth.petramoreno-8.workers.dev
   auth_endpoint: auth
 
-media_folder: "assets/images"
+media_folder: "the-studio-by-petra-editable-cms/assets/images"
 public_folder: "/assets/images"
 
 collections:
