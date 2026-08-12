@@ -1,0 +1,35 @@
+{
+  "siteTitle": "The Studio by Petra",
+  "heroTitle": "The studio.",
+  "heroSubtitle": "by Petra",
+  "statement": "We are all creatives, and this is.",
+  "services": "Communication Strategy | Brand Identity | Social Media Management | Community Management",
+  "projectsHeading": "CONCEPT PROJECTS",
+  "projectsIntro": "Starting something new is not always easy. It takes curiosity, experimentation, and a willingness to try ideas without knowing exactly where they will lead.",
+  "projectsBody": "These concept projects are my way of exploring brand identities, storytelling, social media strategies, content planning, post design and campaign concepts. These projects focus on concept and creative direction, from the initial idea to how it could come to life visually and strategically.",
+  "aboutHeading": "ABOUT ME",
+  "aboutLead": "Cat mum. Sports lover. Color enthusiast. I create ideas, content, and experiences that are bold, organised, and built to make an impact.",
+  "aboutBody": "My work sits between creativity and delivery: shaping concepts, building communication strategies, coordinating people and moving pieces, and turning ideas into something real.",
+  "contactHeading": "CONTACT ME",
+  "contactText": "Every project starts with an idea. If you’re ready to share yours or just want to say hi, drop me a message.",
+  "email": "",
+  "instagram": "",
+  "linkedin": "",
+  "copyright": "© 2026 Petra Moreno. All Rights Reserved.",
+  "colors": {
+    "cream": "#E6DDCF",
+    "mustard": "#DDB982",
+    "burgundy": "#7A4C4D",
+    "warmWhite": "#F7F3ED",
+    "blue": "#69A8DA"
+  },
+  "fonts": {
+    "display": "DM Serif Display",
+    "body": "Libre Baskerville"
+  },
+  "images": {
+    "hero": "/assets/images/hero-reference.png",
+    "about": "/assets/images/about-photo.png",
+    "contact": "/assets/images/contact-art.png"
+  }
+}

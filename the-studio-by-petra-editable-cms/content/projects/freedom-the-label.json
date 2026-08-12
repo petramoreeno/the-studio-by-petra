@@ -1,0 +1,30 @@
+{
+  "slug": "freedom-the-label",
+  "title": "Freedom – The label.",
+  "category": "Academic Project",
+  "featured": true,
+  "cover": "/assets/images/projects-reference.png",
+  "intro": "As part of my Postgraduate in Social Media Management, I created a complete mockup for Freedom, developing the brand concept, visual identity, and social media content.",
+  "sections": [
+    {
+      "heading": "ABOUT THE BRAND",
+      "text": "Freedom is an activewear brand that combines style, comfort, and sustainability. Designed for everyone, its mission is to offer clothing that empowers and celebrates diversity.",
+      "image": ""
+    },
+    {
+      "heading": "BRAND RELEVANCE",
+      "text": "The relevance of the Freedom brand lies in its ability to combine responsible fashion, style and comfort, adaptability, and a more conscious future.",
+      "image": ""
+    },
+    {
+      "heading": "THE FEELING",
+      "text": "Live beyond what is necessary, move with purpose, and dress with awareness. Your journey, your choice, your freedom.",
+      "image": ""
+    },
+    {
+      "heading": "THE LAUNCH.",
+      "text": "Freedom is being YOURSELF. The campaign communicates freedom, authenticity, sustainability and community.",
+      "image": ""
+    }
+  ]
+}
