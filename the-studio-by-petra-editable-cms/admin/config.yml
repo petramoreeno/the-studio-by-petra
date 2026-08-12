@@ -14,7 +14,7 @@ collections:
     files:
       - name: "settings"
         label: "Homepage, About & Contact"
-        file: "content/site.json"
+        file: "the-studio-by-petra-editable-cms/content/site.json"
         format: "json"
         fields:
           - {label: "Website name", name: "siteTitle", widget: "string"}
@@ -60,7 +60,7 @@ collections:
 
   - name: "projects"
     label: "Projects"
-    folder: "content/projects"
+    folder: "the-studio-by-petra-editable-cms/content/projects"
     create: true
     delete: true
     extension: "json"
