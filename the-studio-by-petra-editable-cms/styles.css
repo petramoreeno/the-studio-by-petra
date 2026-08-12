@@ -328,11 +328,6 @@ img {
   padding-bottom: 120px;
 }
 
-/*
-  Text on the left.
-  Small square photo on the right.
-*/
-
 #about .wrap {
   display: grid;
 
@@ -351,7 +346,6 @@ img {
 
 #about .eyebrow {
   grid-area: heading;
-
   margin-bottom: 48px;
 }
 
@@ -368,7 +362,7 @@ img {
   max-width: 760px;
 }
 
-/* THE SMALL SQUARE PHOTO */
+/* SMALL SQUARE ABOUT PHOTO */
 
 .about-img {
   grid-area: image;
@@ -379,7 +373,9 @@ img {
   margin: 0;
 
   object-fit: cover;
-  object-position: center;
+
+  /* Keeps Petra visible in the crop */
+  object-position: 20% center;
 
   justify-self: end;
   align-self: center;
@@ -687,6 +683,8 @@ img {
   .about-img {
     width: 240px;
     height: 240px;
+
+    object-position: 20% center;
   }
 
   .contact-img {
@@ -810,7 +808,9 @@ img {
     margin-top: 36px;
 
     object-fit: cover;
-    object-position: center;
+
+    /* Keep Petra visible on mobile too */
+    object-position: 20% center;
   }
 
   .contact-img {
