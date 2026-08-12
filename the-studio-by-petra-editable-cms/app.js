@@ -1,19 +1,421 @@
-const $=s=>document.querySelector(s);
-async function getJSON(u){const r=await fetch(u);if(!r.ok)throw new Error(u);return r.json()}
-function setTheme(s){const c=s.colors||{},f=s.fonts||{};const r=document.documentElement.style;r.setProperty("--cream",c.cream||"#E6DDCF");r.setProperty("--mustard",c.mustard||"#DDB982");r.setProperty("--burgundy",c.burgundy||"#7A4C4D");r.setProperty("--white",c.warmWhite||"#F7F3ED");r.setProperty("--blue",c.blue||"#69A8DA");r.setProperty("--display",`"${f.display||"DM Serif Display"}"`);r.setProperty("--body",`"${f.body||"Libre Baskerville"}"`)}
-function menu(){return `<div class="menu" id="menu"><div style="display:flex;justify-content:space-between"><span class="brand">The Studio by Petra</span><button class="close" onclick="toggleMenu()">×</button></div><nav><a href="/#home">Home</a><a href="/#about">About me</a><a href="/#projects">Projects</a><a href="/#contact">Contact</a></nav></div>`}
-window.toggleMenu=()=>$("#menu").classList.toggle("open");
-async function loadProjects(){const names=["freedom-the-label","musa-beer-on-tiktok"];return Promise.all(names.map(n=>getJSON(`/content/projects/${n}.json`)))}
-async function home(){
- const [s,ps]=await Promise.all([getJSON("/content/site.json"),loadProjects()]);setTheme(s);
- document.title=s.siteTitle;
- $("#app").innerHTML=`${menu()}<header class="hero" id="home"><div class="hero-media" style="background-image:url('${s.images.hero}')"></div><div class="hero-shade"></div><div class="topbar"><a class="brand" href="#home">${s.siteTitle}</a><button class="hamb" onclick="toggleMenu()" aria-label="Menu"></button></div><div class="hero-copy"><h1>${s.heroTitle}</h1><p>${s.heroSubtitle}</p></div></header>
- <section class="section mustard center"><div class="wrap"><h2 class="statement display">${s.statement}</h2><div class="services">${s.services}</div></div></section>
- <section class="section cream" id="projects"><div class="wrap"><div class="eyebrow">${s.projectsHeading}</div><div class="lead">${s.projectsIntro}</div><div class="bodycopy">${s.projectsBody}</div><div class="projects-grid">${ps.map(p=>`<a class="project-card" href="/?project=${p.slug}" style="background-image:url('${p.cover}')"><div class="label">${p.title}<span class="category">${p.category}</span></div></a>`).join("")}</div></div></section>
- <section class="section cream" id="about"><div class="wrap"><div class="eyebrow">${s.aboutHeading}</div><div class="lead">${s.aboutLead}</div><div class="bodycopy">${s.aboutBody}</div><img class="about-img" src="${s.images.about}" alt=""></div></section>
- <section class="section mustard" id="contact"><div class="wrap"><div class="eyebrow">${s.contactHeading}</div><div class="lead">${s.contactText}</div><div class="contact-links">${s.email?`<a class="pill" href="mailto:${s.email}">Email</a>`:""}${s.instagram?`<a class="pill" href="${s.instagram}">Instagram</a>`:""}${s.linkedin?`<a class="pill" href="${s.linkedin}">LinkedIn</a>`:""}</div><img class="contact-img" src="${s.images.contact}" alt=""></div></section>
- <footer class="footer cream"><div class="wrap footer-row"><div><span class="footer-logo">The Studio</span> &nbsp; by Petra</div><div>${s.copyright}</div></div></footer><a class="cms-note" href="/admin/">Edit website</a>`}
-async function project(slug){
- const [s,p]=await Promise.all([getJSON("/content/site.json"),getJSON(`/content/projects/${slug}.json`)]);setTheme(s);document.title=`${p.title} — ${s.siteTitle}`;
- $("#app").innerHTML=`${menu()}<div class="topbar" style="position:relative;left:auto;right:auto;top:auto;padding:4vh 6vw;color:var(--burgundy)"><a class="brand" href="/">${s.siteTitle}</a><button class="hamb" onclick="toggleMenu()"></button></div><main><section class="case-hero cream"><div class="wrap"><a class="back" href="/">← Back to projects</a><h1 class="case-title">${p.title}</h1><div class="lead">${p.intro}</div><img class="case-cover" src="${p.cover}" alt=""></div></section>${p.sections.map((x,i)=>`<section class="case-section ${i%2?"mustard":"cream"}"><div class="wrap"><h2>${x.heading}</h2><div class="bodycopy">${x.text}</div>${x.image?`<img src="${x.image}" alt="">`:""}</div></section>`).join("")}</main><a class="cms-note" href="/admin/">Edit website</a>`}
-const q=new URLSearchParams(location.search);q.get("project")?project(q.get("project")):home();
+const $ = (selector) => document.querySelector(selector);
+
+async function getJSON(paths) {
+  const options = Array.isArray(paths) ? paths : [paths];
+
+  for (const path of options) {
+    try {
+      const response = await fetch(path);
+
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (error) {
+      console.warn(`Could not load ${path}`, error);
+    }
+  }
+
+  throw new Error(`Could not load: ${options.join(", ")}`);
+}
+
+function setTheme(site) {
+  const colors = site.colors || {};
+  const fonts = site.fonts || {};
+  const root = document.documentElement.style;
+
+  root.setProperty("--cream", colors.cream || "#E6DDCF");
+  root.setProperty("--mustard", colors.mustard || "#DDB982");
+  root.setProperty("--burgundy", colors.burgundy || "#7A4C4D");
+  root.setProperty("--white", colors.warmWhite || "#F7F3ED");
+  root.setProperty("--blue", colors.blue || "#69A8DA");
+
+  root.setProperty(
+    "--display",
+    `"${fonts.display || "DM Serif Display"}"`
+  );
+
+  root.setProperty(
+    "--body",
+    `"${fonts.body || "Libre Baskerville"}"`
+  );
+}
+
+function menu(siteTitle = "The Studio by Petra") {
+  return `
+    <div class="menu" id="menu">
+      <div class="menu-top">
+        <a class="brand" href="/">${siteTitle}</a>
+        <button class="close" onclick="toggleMenu()" aria-label="Close menu">
+          ×
+        </button>
+      </div>
+
+      <nav>
+        <a href="/#home" onclick="toggleMenu()">Home</a>
+        <a href="/#projects" onclick="toggleMenu()">Projects</a>
+        <a href="/#about" onclick="toggleMenu()">About me</a>
+        <a href="/#contact" onclick="toggleMenu()">Contact</a>
+      </nav>
+    </div>
+  `;
+}
+
+window.toggleMenu = function () {
+  const menuElement = $("#menu");
+
+  if (menuElement) {
+    menuElement.classList.toggle("open");
+  }
+};
+
+async function loadProject(slug) {
+  return getJSON([
+    `/content/projects/${slug}.json`,
+    `/the-studio-by-petra-editable-cms/content/projects/${slug}.json`
+  ]);
+}
+
+async function loadProjects() {
+  const slugs = [
+    "freedom-the-label",
+    "musa-beer-on-tiktok"
+  ];
+
+  const results = await Promise.allSettled(
+    slugs.map((slug) => loadProject(slug))
+  );
+
+  return results
+    .filter((result) => result.status === "fulfilled")
+    .map((result) => result.value);
+}
+
+async function loadSite() {
+  return getJSON([
+    "/content/site.json",
+    "/the-studio-by-petra-editable-cms/content/site.json"
+  ]);
+}
+
+async function home() {
+  const [site, projects] = await Promise.all([
+    loadSite(),
+    loadProjects()
+  ]);
+
+  setTheme(site);
+  document.title = site.siteTitle || "The Studio by Petra";
+
+  const featuredProjects = projects.filter(
+    (project) => project.featured !== false
+  );
+
+  $("#app").innerHTML = `
+    ${menu(site.siteTitle)}
+
+    <header class="hero" id="home">
+      <div
+        class="hero-media"
+        style="background-image: url('${site.images?.hero || ""}')"
+      ></div>
+
+      <div class="hero-shade"></div>
+
+      <div class="topbar">
+        <a class="brand" href="#home">
+          ${site.siteTitle || "The Studio by Petra"}
+        </a>
+
+        <button
+          class="hamb"
+          onclick="toggleMenu()"
+          aria-label="Open menu"
+        ></button>
+      </div>
+
+      <div class="hero-copy">
+        <h1>${site.heroTitle || "The studio."}</h1>
+        <p>${site.heroSubtitle || "by Petra"}</p>
+      </div>
+    </header>
+
+    <section class="section mustard statement-section">
+      <div class="wrap center">
+        <h2 class="statement">
+          ${site.statement || "We are all creatives, and this is."}
+        </h2>
+
+        <div class="services">
+          ${
+            site.services ||
+            "Communication Strategy | Brand Identity | Social Media Management | Community Management"
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section cream" id="projects">
+      <div class="wrap">
+        <div class="eyebrow">
+          ${site.projectsHeading || "CONCEPT PROJECTS"}
+        </div>
+
+        <div class="lead">
+          ${site.projectsIntro || ""}
+        </div>
+
+        <div class="bodycopy">
+          ${site.projectsBody || ""}
+        </div>
+
+        <div class="projects-grid">
+          ${featuredProjects
+            .map(
+              (project) => `
+                <a
+                  class="project-card"
+                  href="/?project=${project.slug}"
+                  style="background-image: url('${project.cover || ""}')"
+                >
+                  <div class="project-card-overlay"></div>
+
+                  <div class="label">
+                    ${project.title}
+
+                    <span class="category">
+                      ${project.category || ""}
+                    </span>
+                  </div>
+                </a>
+              `
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+
+    <section class="section cream" id="about">
+      <div class="wrap">
+        <div class="eyebrow">
+          ${site.aboutHeading || "ABOUT ME"}
+        </div>
+
+        <div class="lead">
+          ${site.aboutLead || ""}
+        </div>
+
+        <div class="bodycopy">
+          ${site.aboutBody || ""}
+        </div>
+
+        ${
+          site.images?.about
+            ? `
+              <img
+                class="about-img"
+                src="${site.images.about}"
+                alt="About Petra"
+              >
+            `
+            : ""
+        }
+      </div>
+    </section>
+
+    <section class="section mustard" id="contact">
+      <div class="wrap">
+        <div class="eyebrow">
+          ${site.contactHeading || "CONTACT ME"}
+        </div>
+
+        <div class="lead">
+          ${site.contactText || ""}
+        </div>
+
+        <div class="contact-links">
+          ${
+            site.email
+              ? `<a class="pill" href="mailto:${site.email}">Email</a>`
+              : ""
+          }
+
+          ${
+            site.instagram
+              ? `<a class="pill" href="${site.instagram}" target="_blank">Instagram</a>`
+              : ""
+          }
+
+          ${
+            site.linkedin
+              ? `<a class="pill" href="${site.linkedin}" target="_blank">LinkedIn</a>`
+              : ""
+          }
+        </div>
+
+        ${
+          site.images?.contact
+            ? `
+              <img
+                class="contact-img"
+                src="${site.images.contact}"
+                alt="Contact"
+              >
+            `
+            : ""
+        }
+      </div>
+    </section>
+
+    <footer class="footer cream">
+      <div class="wrap footer-row">
+        <div class="footer-brand">
+          <span class="footer-logo">The Studio</span>
+          <span>by Petra</span>
+        </div>
+
+        <div>
+          ${
+            site.copyright ||
+            "© 2026 Petra Moreno. All Rights Reserved."
+          }
+        </div>
+      </div>
+    </footer>
+  `;
+}
+
+async function project(slug) {
+  const [site, project] = await Promise.all([
+    loadSite(),
+    loadProject(slug)
+  ]);
+
+  setTheme(site);
+
+  document.title = `${project.title} — ${
+    site.siteTitle || "The Studio by Petra"
+  }`;
+
+  $("#app").innerHTML = `
+    ${menu(site.siteTitle)}
+
+    <header class="case-topbar">
+      <a class="brand" href="/">
+        ${site.siteTitle || "The Studio by Petra"}
+      </a>
+
+      <button
+        class="hamb"
+        onclick="toggleMenu()"
+        aria-label="Open menu"
+      ></button>
+    </header>
+
+    <main class="case-study">
+      <section class="case-hero cream">
+        <div class="wrap">
+
+          <a class="back" href="/#projects">
+            ← Back to projects
+          </a>
+
+          <div class="case-category">
+            ${project.category || ""}
+          </div>
+
+          <h1 class="case-title">
+            ${project.title}
+          </h1>
+
+          <div class="case-intro">
+            ${project.intro || ""}
+          </div>
+
+          ${
+            project.cover
+              ? `
+                <img
+                  class="case-cover"
+                  src="${project.cover}"
+                  alt="${project.title}"
+                >
+              `
+              : ""
+          }
+        </div>
+      </section>
+
+      ${(project.sections || [])
+        .map(
+          (section, index) => `
+            <section
+              class="case-section ${
+                index % 2 === 0 ? "cream" : "mustard"
+              }"
+            >
+              <div class="wrap case-section-inner">
+
+                <h2>
+                  ${section.heading || ""}
+                </h2>
+
+                <div class="bodycopy case-text">
+                  ${(section.text || "").replace(/\n/g, "<br>")}
+                </div>
+
+                ${
+                  section.image
+                    ? `
+                      <img
+                        class="case-section-image"
+                        src="${section.image}"
+                        alt="${section.heading || project.title}"
+                      >
+                    `
+                    : ""
+                }
+
+              </div>
+            </section>
+          `
+        )
+        .join("")}
+    </main>
+
+    <footer class="footer cream">
+      <div class="wrap footer-row">
+        <div class="footer-brand">
+          <span class="footer-logo">The Studio</span>
+          <span>by Petra</span>
+        </div>
+
+        <a href="/#projects">
+          Explore more projects →
+        </a>
+      </div>
+    </footer>
+  `;
+}
+
+async function start() {
+  const query = new URLSearchParams(window.location.search);
+  const slug = query.get("project");
+
+  try {
+    if (slug) {
+      await project(slug);
+    } else {
+      await home();
+    }
+  } catch (error) {
+    console.error(error);
+
+    $("#app").innerHTML = `
+      <div class="loading">
+        Something went wrong loading The Studio by Petra.
+      </div>
+    `;
+  }
+}
+
+start();
