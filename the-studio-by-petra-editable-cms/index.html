@@ -13,7 +13,7 @@
 
   <meta
     name="description"
-    content="The Studio by Petra is getting ready. A portfolio of ideas, strategy, creativity and things brought to life."
+    content="The Studio by Petra — a portfolio of ideas, strategy, creativity and things brought to life."
   >
 
   <link
@@ -69,7 +69,12 @@
       text-decoration: none;
     }
 
-    .page {
+
+    /* =========================
+       GETTING READY PAGE
+    ========================= */
+
+    .coming-soon-page {
       min-height: 100vh;
 
       display: flex;
@@ -81,13 +86,13 @@
         36px;
     }
 
-    .topbar {
+    .coming-topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .brand {
+    .coming-brand {
       font-family:
         "Bodoni Moda",
         Georgia,
@@ -103,7 +108,7 @@
       font-weight: 400;
     }
 
-    .status {
+    .coming-status {
       font-size: 11px;
 
       text-transform: uppercase;
@@ -111,7 +116,7 @@
       letter-spacing: 0.12em;
     }
 
-    .hero {
+    .coming-hero {
       flex: 1;
 
       display: flex;
@@ -123,13 +128,13 @@
         55px;
     }
 
-    .hero-inner {
+    .coming-inner {
       width: min(100%, 1180px);
 
       margin: 0 auto;
     }
 
-    .eyebrow {
+    .coming-eyebrow {
       margin:
         0
         0
@@ -142,7 +147,7 @@
       letter-spacing: 0.12em;
     }
 
-    h1 {
+    .coming-title {
       max-width: 1000px;
 
       margin: 0;
@@ -167,7 +172,7 @@
         -0.045em;
     }
 
-    .intro {
+    .coming-intro {
       max-width: 560px;
 
       margin:
@@ -190,7 +195,7 @@
       line-height: 1.25;
     }
 
-    .coming {
+    .coming-label {
       margin-top: 35px;
 
       font-size: 12px;
@@ -200,7 +205,7 @@
       letter-spacing: 0.13em;
     }
 
-    .footer {
+    .coming-footer {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -220,14 +225,14 @@
       padding-top: 24px;
     }
 
-    .socials {
+    .coming-socials {
       display: flex;
       align-items: center;
 
       gap: 24px;
     }
 
-    .social {
+    .coming-social {
       width: 30px;
       height: 30px;
 
@@ -240,36 +245,33 @@
         transform 0.2s ease;
     }
 
-    .social:hover {
+    .coming-social:hover {
       opacity: 0.6;
 
       transform:
         translateY(-2px);
     }
 
-    .social svg {
+    .coming-social svg {
       width: 25px;
       height: 25px;
 
       fill: none;
 
-      stroke:
-        currentColor;
+      stroke: currentColor;
 
       stroke-width: 1.5;
 
       stroke-linecap: round;
-
       stroke-linejoin: round;
     }
 
-    .social .fill {
+    .coming-social .fill {
       fill: currentColor;
-
       stroke: none;
     }
 
-    .copyright {
+    .coming-copyright {
       font-size: 11px;
 
       line-height: 1.5;
@@ -277,27 +279,32 @@
       text-align: right;
     }
 
+
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 700px) {
 
-      .page {
+      .coming-soon-page {
         padding:
           30px
           6%
           28px;
       }
 
-      .status {
+      .coming-status {
         display: none;
       }
 
-      .hero {
+      .coming-hero {
         padding:
           60px
           0
           45px;
       }
 
-      h1 {
+      .coming-title {
         font-size:
           clamp(
             62px,
@@ -308,7 +315,7 @@
         line-height: 0.92;
       }
 
-      .intro {
+      .coming-intro {
         max-width: 100%;
 
         margin-top: 34px;
@@ -316,15 +323,16 @@
         font-size: 24px;
       }
 
-      .footer {
+      .coming-footer {
         flex-direction: column;
 
         align-items: flex-start;
       }
 
-      .copyright {
+      .coming-copyright {
         text-align: left;
       }
+
     }
 
   </style>
@@ -334,199 +342,387 @@
 
 <body>
 
-  <main class="page">
-
-    <header class="topbar">
-
-      <div class="brand">
-        The Studio by Petra
-      </div>
-
-      <div class="status">
-        Portfolio in progress
-      </div>
-
-    </header>
+  <div id="app"></div>
 
 
-    <section class="hero">
+  <script>
 
-      <div class="hero-inner">
+    /* =========================================
+       THE STUDIO BY PETRA
 
-        <div class="eyebrow">
-          Something good is coming
-        </div>
+       PUBLIC:
+       /
+       = Coming Soon
 
-        <h1>
-          The Studio<br>
-          is getting<br>
-          ready.
-        </h1>
-
-        <div class="intro">
-          Ideas are brewing.
-          Projects are taking shape.
-          A portfolio of strategy,
-          creativity and things
-          brought to life is coming soon.
-        </div>
-
-        <div class="coming">
-          Coming soon.
-        </div>
-
-      </div>
-
-    </section>
+       PRIVATE PREVIEW:
+       /preview
+       = Full Portfolio
+    ========================================= */
 
 
-    <footer class="footer">
+    const path =
+      window.location.pathname
+        .replace(/\/+$/, "");
 
-      <div class="socials">
 
-        <!-- EMAIL -->
+    const isPreview =
+      path === "/preview";
 
-        <a
-          class="social"
-          href="mailto:petra.moreno8@gmail.com"
-          aria-label="Email Petra"
-          title="Email"
+
+    /* =========================================
+       PORTFOLIO PREVIEW
+    ========================================= */
+
+    if (isPreview) {
+
+      /*
+        Load the original portfolio stylesheet.
+      */
+
+      const stylesheet =
+        document.createElement("link");
+
+      stylesheet.rel =
+        "stylesheet";
+
+      stylesheet.href =
+        "/styles.css";
+
+      document.head.appendChild(
+        stylesheet
+      );
+
+
+      /*
+        Change body back to the normal
+        portfolio styling.
+
+        styles.css will then take over.
+      */
+
+      document.body.style.background =
+        "";
+
+      document.body.style.color =
+        "";
+
+
+      /*
+        Load the original app.js.
+
+        This means the entire portfolio,
+        projects, About, Contact, CMS content,
+        etc. continue working normally.
+      */
+
+      const portfolioScript =
+        document.createElement("script");
+
+      portfolioScript.src =
+        "/app.js";
+
+      portfolioScript.defer =
+        true;
+
+      document.body.appendChild(
+        portfolioScript
+      );
+
+    }
+
+
+    /* =========================================
+       PUBLIC COMING SOON PAGE
+    ========================================= */
+
+    else {
+
+      document.getElementById(
+        "app"
+      ).innerHTML = `
+
+        <main
+          class="coming-soon-page"
         >
 
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
+
+          <!-- TOP -->
+
+          <header
+            class="coming-topbar"
           >
 
-            <rect
-              x="3"
-              y="5"
-              width="18"
-              height="14"
-              rx="1"
-            ></rect>
 
-            <path
-              d="M3 7l9 6 9-6"
-            ></path>
+            <div
+              class="coming-brand"
+            >
 
-          </svg>
+              The Studio by Petra
 
-        </a>
+            </div>
 
 
-        <!-- INSTAGRAM -->
+            <div
+              class="coming-status"
+            >
 
-        <a
-          class="social"
-          href="https://www.instagram.com/petramoreeno/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          title="Instagram"
-        >
+              Portfolio in progress
 
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
+            </div>
+
+
+          </header>
+
+
+
+          <!-- HERO -->
+
+          <section
+            class="coming-hero"
           >
 
-            <rect
-              x="3"
-              y="3"
-              width="18"
-              height="18"
-              rx="5"
-            ></rect>
 
-            <circle
-              cx="12"
-              cy="12"
-              r="4"
-            ></circle>
-
-            <circle
-              class="fill"
-              cx="17.4"
-              cy="6.6"
-              r="1"
-            ></circle>
-
-          </svg>
-
-        </a>
+            <div
+              class="coming-inner"
+            >
 
 
-        <!-- LINKEDIN -->
+              <div
+                class="coming-eyebrow"
+              >
 
-        <a
-          class="social"
-          href="https://www.linkedin.com/in/petra-moreno-33b009131/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          title="LinkedIn"
-        >
+                Something good is coming
 
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
+              </div>
+
+
+              <h1
+                class="coming-title"
+              >
+
+                The Studio<br>
+
+                is getting<br>
+
+                ready.
+
+              </h1>
+
+
+              <div
+                class="coming-intro"
+              >
+
+                Ideas are brewing.
+                Projects are taking shape.
+                A portfolio of strategy,
+                creativity and things
+                brought to life is coming soon.
+
+              </div>
+
+
+              <div
+                class="coming-label"
+              >
+
+                Coming soon.
+
+              </div>
+
+
+            </div>
+
+
+          </section>
+
+
+
+          <!-- FOOTER -->
+
+          <footer
+            class="coming-footer"
           >
 
-            <rect
-              x="3"
-              y="3"
-              width="18"
-              height="18"
-              rx="1"
-            ></rect>
 
-            <circle
-              class="fill"
-              cx="7.3"
-              cy="8"
-              r="1.2"
-            ></circle>
-
-            <path
-              d="M7.3 10.5v6.3"
-            ></path>
-
-            <path
-              d="M11 10.5v6.3"
-            ></path>
-
-            <path
-              d="
-                M11 13.3
-                c0-1.7
-                1.1-3
-                2.8-3
-                1.8 0
-                2.9 1.2
-                2.9 3.2
-                v3.3
-              "
-            ></path>
-
-          </svg>
-
-        </a>
-
-      </div>
+            <div
+              class="coming-socials"
+            >
 
 
-      <div class="copyright">
+              <!-- EMAIL -->
 
-        The Studio by Petra<br>
+              <a
+                class="coming-social"
+                href="mailto:petra.moreno8@gmail.com"
+                aria-label="Email Petra"
+                title="Email"
+              >
 
-        © 2026 Petra Moreno
 
-      </div>
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
 
-    </footer>
+                  <rect
+                    x="3"
+                    y="5"
+                    width="18"
+                    height="14"
+                    rx="1"
+                  ></rect>
 
-  </main>
+                  <path
+                    d="M3 7l9 6 9-6"
+                  ></path>
+
+                </svg>
+
+
+              </a>
+
+
+
+              <!-- INSTAGRAM -->
+
+              <a
+                class="coming-social"
+                href="https://www.instagram.com/petramoreeno/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                title="Instagram"
+              >
+
+
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+
+
+                  <rect
+                    x="3"
+                    y="3"
+                    width="18"
+                    height="18"
+                    rx="5"
+                  ></rect>
+
+
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="4"
+                  ></circle>
+
+
+                  <circle
+                    class="fill"
+                    cx="17.4"
+                    cy="6.6"
+                    r="1"
+                  ></circle>
+
+
+                </svg>
+
+
+              </a>
+
+
+
+              <!-- LINKEDIN -->
+
+              <a
+                class="coming-social"
+                href="https://www.linkedin.com/in/petra-moreno-33b009131/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                title="LinkedIn"
+              >
+
+
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+
+
+                  <rect
+                    x="3"
+                    y="3"
+                    width="18"
+                    height="18"
+                    rx="1"
+                  ></rect>
+
+
+                  <circle
+                    class="fill"
+                    cx="7.3"
+                    cy="8"
+                    r="1.2"
+                  ></circle>
+
+
+                  <path
+                    d="M7.3 10.5v6.3"
+                  ></path>
+
+
+                  <path
+                    d="M11 10.5v6.3"
+                  ></path>
+
+
+                  <path
+                    d="
+                      M11 13.3
+                      c0-1.7
+                      1.1-3
+                      2.8-3
+                      1.8 0
+                      2.9 1.2
+                      2.9 3.2
+                      v3.3
+                    "
+                  ></path>
+
+
+                </svg>
+
+
+              </a>
+
+
+            </div>
+
+
+
+            <div
+              class="coming-copyright"
+            >
+
+              The Studio by Petra<br>
+
+              © 2026 Petra Moreno
+
+            </div>
+
+
+          </footer>
+
+
+        </main>
+
+      `;
+
+    }
+
+  </script>
 
 </body>
 
