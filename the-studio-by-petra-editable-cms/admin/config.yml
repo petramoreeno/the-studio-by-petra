@@ -16,59 +16,92 @@ collections:
         label: "Homepage, About & Contact"
         file: "the-studio-by-petra-editable-cms/content/site.json"
         format: "json"
+
         fields:
           - {label: "Website name", name: "siteTitle", widget: "string"}
+
           - {label: "Hero title", name: "heroTitle", widget: "string"}
+
           - {label: "Hero subtitle", name: "heroSubtitle", widget: "string"}
+
           - {label: "Hero image", name: "hero", widget: "image", required: false}
+
           - {label: "Main statement", name: "statement", widget: "string"}
+
           - {label: "Services", name: "services", widget: "text"}
+
           - {label: "Projects heading", name: "projectsHeading", widget: "string"}
+
           - {label: "Projects intro", name: "projectsIntro", widget: "text"}
+
           - {label: "Projects body", name: "projectsBody", widget: "text"}
+
           - {label: "About heading", name: "aboutHeading", widget: "string"}
+
           - {label: "About lead", name: "aboutLead", widget: "text"}
+
           - {label: "About body", name: "aboutBody", widget: "text"}
+
           - {label: "Contact heading", name: "contactHeading", widget: "string"}
+
           - {label: "Contact text", name: "contactText", widget: "text"}
+
           - {label: "Email", name: "email", widget: "string", required: false}
+
           - {label: "Instagram URL", name: "instagram", widget: "string", required: false}
+
           - {label: "LinkedIn URL", name: "linkedin", widget: "string", required: false}
+
           - {label: "Copyright", name: "copyright", widget: "string"}
 
           - label: "Colours"
             name: "colors"
             widget: "object"
+
             fields:
               - {label: "Cream", name: "cream", widget: "color"}
+
               - {label: "Mustard", name: "mustard", widget: "color"}
+
               - {label: "Burgundy", name: "burgundy", widget: "color"}
+
               - {label: "Warm white", name: "warmWhite", widget: "color"}
+
               - {label: "Blue", name: "blue", widget: "color"}
 
           - label: "Fonts"
             name: "fonts"
             widget: "object"
+
             fields:
               - {label: "Display font", name: "display", widget: "string"}
+
               - {label: "Body font", name: "body", widget: "string"}
 
           - label: "Images"
             name: "images"
             widget: "object"
+
             fields:
               - {label: "Hero", name: "hero", widget: "image"}
+
               - {label: "About", name: "about", widget: "image"}
+
               - {label: "Contact", name: "contact", widget: "image"}
+
 
   - name: "projects"
     label: "Projects"
     folder: "the-studio-by-petra-editable-cms/content/projects"
+
     create: true
     delete: true
+
     extension: "json"
     format: "json"
+
     identifier_field: "title"
+
     slug: "{{slug}}"
 
     fields:
@@ -84,96 +117,162 @@ collections:
 
       - {label: "Introduction", name: "intro", widget: "text"}
 
+
       - label: "Sections"
         name: "sections"
         widget: "list"
-        types:
+
+        summary: "{{fields.heading}} — {{fields.layout}}"
+
+        fields:
+
+          - label: "Layout"
+            name: "layout"
+            widget: "select"
+            required: false
+            default: "text"
+
+            options:
+              - {label: "Text", value: "text"}
+
+              - {label: "Text + Image", value: "text_image"}
+
+              - {label: "Cards", value: "cards"}
+
+              - {label: "Two Columns", value: "two_columns"}
+
+              - {label: "Feature", value: "feature"}
+
+              - {label: "Gallery", value: "gallery"}
+
+              - {label: "Full-width Image", value: "full_image"}
+
+
+          - label: "Heading"
+            name: "heading"
+            widget: "string"
+            required: false
+
+
+          - label: "Eyebrow"
+            name: "eyebrow"
+            widget: "string"
+            required: false
+            hint: "Optional. Mainly used for Feature sections."
+
 
           - label: "Text"
             name: "text"
-            widget: "object"
-            fields:
-              - {label: "Heading", name: "heading", widget: "string", required: false}
-              - {label: "Text", name: "text", widget: "text"}
+            widget: "text"
+            required: false
 
-          - label: "Text + Image"
-            name: "text_image"
-            widget: "object"
-            fields:
-              - {label: "Heading", name: "heading", widget: "string", required: false}
-              - {label: "Text", name: "text", widget: "text"}
-              - {label: "Image", name: "image", widget: "image", required: false}
-              - label: "Image position"
-                name: "imagePosition"
-                widget: "select"
-                default: "right"
-                options:
-                  - {label: "Right", value: "right"}
-                  - {label: "Left", value: "left"}
 
-          - label: "Full-width Image"
-            name: "full_image"
-            widget: "object"
-            fields:
-              - {label: "Image", name: "image", widget: "image"}
-              - {label: "Caption", name: "caption", widget: "string", required: false}
+          - label: "Main Image"
+            name: "image"
+            widget: "image"
+            required: false
 
-          - label: "Two Columns"
-            name: "two_columns"
-            widget: "object"
-            fields:
-              - {label: "Section heading", name: "heading", widget: "string", required: false}
 
-              - label: "Left column"
-                name: "left"
-                widget: "object"
-                fields:
-                  - {label: "Title", name: "title", widget: "string", required: false}
-                  - {label: "Text", name: "text", widget: "text", required: false}
-                  - {label: "Image", name: "image", widget: "image", required: false}
+          - label: "Image Position"
+            name: "imagePosition"
+            widget: "select"
+            required: false
+            default: "right"
 
-              - label: "Right column"
-                name: "right"
-                widget: "object"
-                fields:
-                  - {label: "Title", name: "title", widget: "string", required: false}
-                  - {label: "Text", name: "text", widget: "text", required: false}
-                  - {label: "Image", name: "image", widget: "image", required: false}
+            options:
+              - {label: "Right", value: "right"}
+
+              - {label: "Left", value: "left"}
+
+
+          - label: "Caption"
+            name: "caption"
+            widget: "string"
+            required: false
+
 
           - label: "Cards"
-            name: "cards"
-            widget: "object"
+            name: "items"
+            widget: "list"
+            required: false
+            collapsed: true
+
             fields:
-              - {label: "Section heading", name: "heading", widget: "string", required: false}
-              - {label: "Intro text", name: "text", widget: "text", required: false}
+              - label: "Title"
+                name: "title"
+                widget: "string"
+                required: false
 
-              - label: "Cards"
-                name: "items"
-                widget: "list"
-                fields:
-                  - {label: "Title", name: "title", widget: "string"}
-                  - {label: "Text", name: "text", widget: "text", required: false}
-                  - {label: "Image", name: "image", widget: "image", required: false}
+              - label: "Text"
+                name: "text"
+                widget: "text"
+                required: false
 
-          - label: "Gallery"
-            name: "gallery"
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                required: false
+
+
+          - label: "Left Column"
+            name: "left"
             widget: "object"
+            required: false
+            collapsed: true
+
             fields:
-              - {label: "Section heading", name: "heading", widget: "string", required: false}
-              - {label: "Intro text", name: "text", widget: "text", required: false}
+              - label: "Title"
+                name: "title"
+                widget: "string"
+                required: false
 
-              - label: "Images"
-                name: "images"
-                widget: "list"
-                fields:
-                  - {label: "Image", name: "image", widget: "image"}
-                  - {label: "Caption", name: "caption", widget: "string", required: false}
+              - label: "Text"
+                name: "text"
+                widget: "text"
+                required: false
 
-          - label: "Feature"
-            name: "feature"
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                required: false
+
+
+          - label: "Right Column"
+            name: "right"
             widget: "object"
+            required: false
+            collapsed: true
+
             fields:
-              - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
-              - {label: "Heading", name: "heading", widget: "string"}
-              - {label: "Text", name: "text", widget: "text"}
-              - {label: "Image", name: "image", widget: "image", required: false}
+              - label: "Title"
+                name: "title"
+                widget: "string"
+                required: false
+
+              - label: "Text"
+                name: "text"
+                widget: "text"
+                required: false
+
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                required: false
+
+
+          - label: "Gallery Images"
+            name: "images"
+            widget: "list"
+            required: false
+            collapsed: true
+
+            fields:
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                required: false
+
+              - label: "Caption"
+                name: "caption"
+                widget: "string"
+                required: false
