@@ -40,6 +40,31 @@
           "text": "Art, humour, spontaneous formats and community creativity the space where the brand could experiment most freely.",
           "image": "/assets/images/4afc8e15d4cba5f0e5c0ab7b1d9a2206.jpg"
         }
+      ],
+      "heading": "Three Worlds, One MUSA"
+    },
+    {
+      "layout": "cards",
+      "imagePosition": "right",
+      "heading": "From Strategy to Content ",
+      "text": "Alongside larger campaigns, we developed recurring formats that could give MUSA a consistent reason to show up throughout the year.",
+      "items": [
+        {
+          "title": "Behind the Scenes",
+          "text": "Everyday life inside the brewery and taprooms, from the people behind MUSA to production processes, customer interactions and spontaneous moments."
+        },
+        {
+          "title": "MUSA tips",
+          "text": "Short, useful and playful content built around the brand, such as “How to pour the perfect beer?”"
+        },
+        {
+          "title": "Mini Interviews",
+          "text": "Fast conversations around culture, music, food and other subjects relevant to MUSA's community."
+        },
+        {
+          "text": "UGC, reactions and challenges designed to turn the audience from viewers into active participants in MUSA's content.",
+          "title": "Community Content"
+        }
       ]
     }
   ]
