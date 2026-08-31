@@ -35,6 +35,7 @@ collections:
           - {label: "Instagram URL", name: "instagram", widget: "string", required: false}
           - {label: "LinkedIn URL", name: "linkedin", widget: "string", required: false}
           - {label: "Copyright", name: "copyright", widget: "string"}
+
           - label: "Colours"
             name: "colors"
             widget: "object"
@@ -44,12 +45,14 @@ collections:
               - {label: "Burgundy", name: "burgundy", widget: "color"}
               - {label: "Warm white", name: "warmWhite", widget: "color"}
               - {label: "Blue", name: "blue", widget: "color"}
+
           - label: "Fonts"
             name: "fonts"
             widget: "object"
             fields:
               - {label: "Display font", name: "display", widget: "string"}
               - {label: "Body font", name: "body", widget: "string"}
+
           - label: "Images"
             name: "images"
             widget: "object"
@@ -67,17 +70,110 @@ collections:
     format: "json"
     identifier_field: "title"
     slug: "{{slug}}"
+
     fields:
       - {label: "Slug", name: "slug", widget: "string"}
+
       - {label: "Project title", name: "title", widget: "string"}
+
       - {label: "Category", name: "category", widget: "string"}
+
       - {label: "Featured", name: "featured", widget: "boolean", default: true}
+
       - {label: "Cover image", name: "cover", widget: "image"}
+
       - {label: "Introduction", name: "intro", widget: "text"}
+
       - label: "Sections"
         name: "sections"
         widget: "list"
-        fields:
-          - {label: "Heading", name: "heading", widget: "string"}
-          - {label: "Text", name: "text", widget: "text"}
-          - {label: "Image", name: "image", widget: "image", required: false}
+        types:
+
+          - label: "Text"
+            name: "text"
+            widget: "object"
+            fields:
+              - {label: "Heading", name: "heading", widget: "string", required: false}
+              - {label: "Text", name: "text", widget: "text"}
+
+          - label: "Text + Image"
+            name: "text_image"
+            widget: "object"
+            fields:
+              - {label: "Heading", name: "heading", widget: "string", required: false}
+              - {label: "Text", name: "text", widget: "text"}
+              - {label: "Image", name: "image", widget: "image", required: false}
+              - label: "Image position"
+                name: "imagePosition"
+                widget: "select"
+                default: "right"
+                options:
+                  - {label: "Right", value: "right"}
+                  - {label: "Left", value: "left"}
+
+          - label: "Full-width Image"
+            name: "full_image"
+            widget: "object"
+            fields:
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Caption", name: "caption", widget: "string", required: false}
+
+          - label: "Two Columns"
+            name: "two_columns"
+            widget: "object"
+            fields:
+              - {label: "Section heading", name: "heading", widget: "string", required: false}
+
+              - label: "Left column"
+                name: "left"
+                widget: "object"
+                fields:
+                  - {label: "Title", name: "title", widget: "string", required: false}
+                  - {label: "Text", name: "text", widget: "text", required: false}
+                  - {label: "Image", name: "image", widget: "image", required: false}
+
+              - label: "Right column"
+                name: "right"
+                widget: "object"
+                fields:
+                  - {label: "Title", name: "title", widget: "string", required: false}
+                  - {label: "Text", name: "text", widget: "text", required: false}
+                  - {label: "Image", name: "image", widget: "image", required: false}
+
+          - label: "Cards"
+            name: "cards"
+            widget: "object"
+            fields:
+              - {label: "Section heading", name: "heading", widget: "string", required: false}
+              - {label: "Intro text", name: "text", widget: "text", required: false}
+
+              - label: "Cards"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Text", name: "text", widget: "text", required: false}
+                  - {label: "Image", name: "image", widget: "image", required: false}
+
+          - label: "Gallery"
+            name: "gallery"
+            widget: "object"
+            fields:
+              - {label: "Section heading", name: "heading", widget: "string", required: false}
+              - {label: "Intro text", name: "text", widget: "text", required: false}
+
+              - label: "Images"
+                name: "images"
+                widget: "list"
+                fields:
+                  - {label: "Image", name: "image", widget: "image"}
+                  - {label: "Caption", name: "caption", widget: "string", required: false}
+
+          - label: "Feature"
+            name: "feature"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+              - {label: "Heading", name: "heading", widget: "string"}
+              - {label: "Text", name: "text", widget: "text"}
+              - {label: "Image", name: "image", widget: "image", required: false}
