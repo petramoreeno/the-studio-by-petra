@@ -712,14 +712,14 @@ button {
 
 
 .case-hero {
-  padding: 125px 0 78px;
+  padding: 115px 0 65px;
 }
 
 
 .case-back {
   display: inline-block;
 
-  margin-bottom: 50px;
+  margin-bottom: 45px;
 
   font-size: 11px;
 
@@ -729,7 +729,7 @@ button {
 
 
 .case-category {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 
   font-size: 11px;
 
@@ -740,27 +740,41 @@ button {
 }
 
 
-.case-hero h1 {
-  max-width: 1000px;
+/*
+   PROJECT TITLE
 
-  margin: 0 0 34px;
+   Large enough to feel editorial,
+   but no longer dominates the whole screen.
+*/
+
+.case-hero h1 {
+  max-width: 920px;
+
+  margin: 0 0 30px;
 
   font-family: var(--display), Georgia, serif;
-  font-size: clamp(54px, 6.5vw, 94px);
+  font-size: clamp(50px, 5.8vw, 84px);
   font-weight: 400;
 
-  line-height: 0.92;
-  letter-spacing: -0.04em;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
 }
 
 
+/*
+   PROJECT INTRODUCTION
+
+   Intentionally smaller than before so there is
+   a clear hierarchy between title and body copy.
+*/
+
 .case-intro {
-  max-width: 760px;
+  max-width: 700px;
 
   font-family: var(--display), Georgia, serif;
-  font-size: clamp(21px, 2vw, 30px);
+  font-size: clamp(19px, 1.65vw, 25px);
 
-  line-height: 1.38;
+  line-height: 1.5;
 }
 
 
@@ -1503,29 +1517,35 @@ button {
   /* PROJECT PAGE */
 
   .case-hero {
-    padding: 105px 0 58px;
+    padding: 95px 0 52px;
   }
 
 
   .case-back {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
+  }
+
+
+  .case-category {
+    margin-bottom: 14px;
   }
 
 
   .case-hero h1 {
-    font-size: 46px;
+    max-width: 100%;
 
-    line-height: 0.98;
+    margin-bottom: 24px;
 
-    margin-bottom: 26px;
+    font-size: 43px;
+    line-height: 1;
   }
 
 
   .case-intro {
     max-width: 100%;
 
-    font-size: 20px;
-    line-height: 1.45;
+    font-size: 18px;
+    line-height: 1.55;
   }
 
 
