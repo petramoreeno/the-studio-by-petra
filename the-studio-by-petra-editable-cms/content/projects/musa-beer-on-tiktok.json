@@ -68,11 +68,19 @@
         }
       ],
       "left": {
-        "image": "/assets/images/1.jpg"
+        "image": ""
       },
       "right": {
-        "image": "/assets/images/3.jpg"
-      }
+        "image": ""
+      },
+      "images": [
+        {
+          "image": "/assets/images/1.jpg"
+        },
+        {
+          "image": "/assets/images/3.jpg"
+        }
+      ]
     }
   ]
 }
