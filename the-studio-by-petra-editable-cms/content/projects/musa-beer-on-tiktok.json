@@ -81,6 +81,19 @@
           "image": "/assets/images/3.jpg"
         }
       ]
+    },
+    {
+      "layout": "two_columns",
+      "imagePosition": "right",
+      "heading": "Strategy built for the year ",
+      "left": {
+        "title": "Spring / Summer ",
+        "text": "Connect MUSA with festivals, outdoor music, rooftop sessions and the social side of the brand.\n\nOpen Mic MUSA · Behind the Scenes · Mini Acoustic Sessions · What's Your Vibe with MUSA? · MUSA Filter · Collaborative Playlists"
+      },
+      "right": {
+        "title": "Fall / Winter",
+        "text": "Position MUSA as a natural companion to comfort food, homemade dishes and winter street food.\n\nRecipes with MUSA · Chefs × Local Foodies · Wintery Combos · One MUSA, A Thousand Dishes"
+      }
     }
   ]
 }
