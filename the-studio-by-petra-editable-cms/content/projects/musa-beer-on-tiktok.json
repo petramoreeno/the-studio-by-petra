@@ -13,11 +13,34 @@
     },
     {
       "heading": "My role",
-      "text": "My contribution focused on research, strategy and creative development. I worked on audience and competitor analysis, TikTok trends and positioning, and helped shape the content pillars and overall campaign structure. From there, I contributed to developing recurring content formats, seasonal activations, influencer ideas, hashtag challenges and community-led concepts designed to turn MUSA's audience from viewers into participants."
+      "text": "My contribution focused on research, strategy and creative development. I worked on audience and competitor analysis, TikTok trends and positioning, and helped shape the content pillars and overall campaign structure. From there, I contributed to developing recurring content formats, seasonal activations, influencer ideas, hashtag challenges and community-led concepts designed to turn MUSA's audience from viewers into participants.",
+      "image": "/assets/images/5f35bcf5fe788072115470be160f5ff7.jpg"
     },
     {
       "heading": "The Strategy ",
-      "text": "Our research pointed towards an audience that was urban, creative, culturally engaged and drawn to brands that felt authentic rather than overly polished. Instead of treating TikTok as another advertising channel, we approached it as an extension of MUSA's world, a place where beer could become the starting point for conversations around music, food, creativity and everyday culture.\n\nThree themes became the foundation of the strategy: food, music and freestyle"
+      "text": "Our research pointed towards an audience that was urban, creative, culturally engaged and drawn to brands that felt authentic rather than overly polished. Instead of treating TikTok as another advertising channel, we approached it as an extension of MUSA's world, a place where beer could become the starting point for conversations around music, food, creativity and everyday culture.\n\nThree themes became the foundation of the strategy: food, music and freestyle",
+      "image": "/assets/images/853ea7cabb8d25c9aef2e09ea073d935.jpg"
+    },
+    {
+      "layout": "cards",
+      "imagePosition": "right",
+      "items": [
+        {
+          "title": "Food",
+          "text": "Recipes, pairings, chefs and food culture bringing MUSA into the moments where people eat, share and discover.",
+          "image": "/assets/images/cf0a5adb33d9a177b534218c0472f045.jpg"
+        },
+        {
+          "title": "Music",
+          "text": "Live sessions, playlists, festivals and emerging artists, reinforcing the connection between MUSA and music culture.",
+          "image": "/assets/images/08d95689f47425c71fc2471ef888ae36.jpg"
+        },
+        {
+          "title": "Freestyle",
+          "text": "Art, humour, spontaneous formats and community creativity the space where the brand could experiment most freely.",
+          "image": "/assets/images/4afc8e15d4cba5f0e5c0ab7b1d9a2206.jpg"
+        }
+      ]
     }
   ]
 }
