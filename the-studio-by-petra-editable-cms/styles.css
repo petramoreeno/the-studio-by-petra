@@ -740,12 +740,7 @@ button {
 }
 
 
-/*
-   PROJECT TITLE
-
-   Large enough to feel editorial,
-   but no longer dominates the whole screen.
-*/
+/* PROJECT TITLE */
 
 .case-hero h1 {
   max-width: 920px;
@@ -761,12 +756,7 @@ button {
 }
 
 
-/*
-   PROJECT INTRODUCTION
-
-   Intentionally smaller than before so there is
-   a clear hierarchy between title and body copy.
-*/
+/* PROJECT INTRODUCTION — JUSTIFIED */
 
 .case-intro {
   max-width: 700px;
@@ -775,6 +765,12 @@ button {
   font-size: clamp(19px, 1.65vw, 25px);
 
   line-height: 1.5;
+
+  text-align: justify;
+  text-justify: inter-word;
+
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 
@@ -841,9 +837,17 @@ button {
 }
 
 
+/* MAIN CASE-STUDY TEXT — JUSTIFIED */
+
 .case-copy {
   font-size: 16px;
   line-height: 1.85;
+
+  text-align: justify;
+  text-justify: inter-word;
+
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 
@@ -1068,9 +1072,13 @@ button {
 }
 
 
+/* Card copy stays left aligned because the columns are narrow */
+
 .case-card-copy {
   font-size: 14px;
   line-height: 1.75;
+
+  text-align: left;
 }
 
 
@@ -1183,11 +1191,19 @@ button {
 }
 
 
+/* Feature paragraph — JUSTIFIED */
+
 .case-feature-copy {
   max-width: 700px;
 
   font-size: 16px;
   line-height: 1.8;
+
+  text-align: justify;
+  text-justify: inter-word;
+
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 
@@ -1538,6 +1554,21 @@ button {
 
     font-size: 43px;
     line-height: 1;
+  }
+
+
+  /*
+     On mobile we return to left alignment.
+     Justified text in a narrow column can create
+     ugly gaps between words.
+  */
+
+  .case-intro,
+  .case-copy,
+  .case-feature-copy {
+    text-align: left;
+    hyphens: none;
+    -webkit-hyphens: none;
   }
 
 
