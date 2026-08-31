@@ -211,13 +211,6 @@ async function loadProject(slug) {
 }
 
 
-/*
-  For now these are the projects displayed on the homepage.
-
-  Later we can make this automatic so you never need
-  to touch app.js when adding a new project.
-*/
-
 async function loadProjects() {
   const slugs = [
     "freedom-the-label",
@@ -801,20 +794,13 @@ function renderFeatureSection(section) {
 
 /* =========================================================
    LEGACY PROJECT SECTIONS
-
-   This keeps Freedom and older content working.
-
-   Old sections only had:
-   heading
-   text
-   image
 ========================================================= */
 
 function renderLegacySection(section) {
   if (section.image) {
     return renderTextImageSection({
       ...section,
-      imagePosition: "right"
+      imagePosition: section.imagePosition || "right"
     });
   }
 
@@ -830,22 +816,20 @@ function renderSection(section) {
   if (!section) return "";
 
   /*
-    Decap list "types" normally saves the selected
-    type in the `type` property.
+    New CMS uses `layout`.
 
-    Depending on configuration/version it may also
-    use `name`.
-
-    We support both.
+    We still support `type` and `name`
+    in case an older/newer saved entry contains them.
   */
 
-  const type =
+  const layout =
+    section.layout ||
     section.type ||
     section.name ||
     "";
 
 
-  switch (type) {
+  switch (layout) {
 
     case "text":
       return renderTextSection(section);
