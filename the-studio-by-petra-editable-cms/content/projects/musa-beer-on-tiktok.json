@@ -63,9 +63,16 @@
         },
         {
           "text": "UGC, reactions and challenges designed to turn the audience from viewers into active participants in MUSA's content.",
-          "title": "Community Content"
+          "title": "Community Content",
+          "image": ""
         }
-      ]
+      ],
+      "left": {
+        "image": "/assets/images/1.jpg"
+      },
+      "right": {
+        "image": "/assets/images/3.jpg"
+      }
     }
   ]
 }
