@@ -139,7 +139,7 @@ function menu(siteTitle = "The Studio by Petra") {
 
         <nav class="menu-nav">
 
-          <a href="/#projects">
+          <a href="/portfolio/">
             Work
           </a>
 
@@ -970,7 +970,7 @@ async function home() {
           <p>What brings you here?</p>
         </div>
         <div class="home-pathways-grid">
-          <a class="home-pathway home-pathway-portfolio" href="/#projects" aria-label="Explore the portfolio">
+          <a class="home-pathway home-pathway-portfolio" href="/portfolio/" aria-label="Explore the portfolio">
             <span class="home-pathway-number">01 / THE WORK</span>
             <span class="home-pathway-bottom">
               <span class="home-pathway-title">Portfolio</span>
@@ -1309,7 +1309,7 @@ async function project(slug) {
 
           <a
             class="case-back"
-            href="/#projects"
+            href="/portfolio/"
           >
             ← Back to work
           </a>
@@ -1376,7 +1376,7 @@ async function project(slug) {
         <div class="wrap">
 
           <a
-            href="/#projects"
+            href="/portfolio/"
             class="case-end-link"
           >
             Back to selected work
@@ -1533,6 +1533,144 @@ async function journalPost(slug) {
   activateMenu();
 }
 
+
+/* =========================================================
+   PORTFOLIO — DEDICATED PAGE
+========================================================= */
+async function portfolioHome() {
+  const app = document.getElementById("app");
+  const site = await loadSite();
+  const projects = await loadProjects();
+  if (!site) {
+    app.innerHTML = '<div class="loading">Could not load the portfolio.</div>';
+    return;
+  }
+  setTheme(site);
+  document.title = "Portfolio — The Studio by Petra";
+  app.innerHTML = `
+    ${menu(site.siteTitle)}
+    <main class="portfolio-page">
+      <header class="portfolio-masthead wrap">
+        <a class="journal-home-link" href="/">← The Studio</a>
+        <div class="portfolio-kicker">THE STUDIO BY PETRA / THE WORK</div>
+        <h1>Portfolio<span>.</span></h1>
+        <p>Ideas, projects &amp; creative work.</p>
+      </header>
+    <section
+      class="projects"
+      id="projects"
+    >
+
+      <div class="wrap">
+
+        <div class="section-heading">
+
+          <h2>
+            ${escapeHTML(site.projectsHeading || "Selected Work")}
+          </h2>
+
+          ${
+            site.projectsIntro
+              ? `
+                <p class="projects-intro">
+                  ${escapeHTML(site.projectsIntro)}
+                </p>
+              `
+              : ""
+          }
+
+          ${
+            site.projectsBody
+              ? `
+                <div class="projects-body">
+                  ${paragraphText(site.projectsBody)}
+                </div>
+              `
+              : ""
+          }
+
+        </div>
+
+
+        <div class="projects-grid">
+
+          ${projects
+            .filter((project) => project.featured !== false)
+            .map((project) => `
+              <article class="project-card">
+
+                <a
+                  href="/?project=${encodeURIComponent(project.slug)}"
+                  class="project-card-link"
+                >
+
+                  <div class="project-image">
+
+                    ${
+                      project.cover
+                        ? `
+                          <img
+                            src="${escapeHTML(project.cover)}"
+                            alt="${escapeHTML(project.title)}"
+                            loading="lazy"
+                          >
+                        `
+                        : ""
+                    }
+
+                  </div>
+
+
+                  <div class="project-info">
+
+                    <div>
+
+                      <h3>
+                        ${escapeHTML(project.title)}
+                      </h3>
+
+                      ${
+                        project.category
+                          ? `
+                            <p>
+                              ${escapeHTML(project.category)}
+                            </p>
+                          `
+                          : ""
+                      }
+
+                    </div>
+
+
+                    <span
+                      class="project-arrow"
+                      aria-hidden="true"
+                    >
+                      ↗
+                    </span>
+
+                  </div>
+
+                </a>
+
+              </article>
+            `)
+            .join("")}
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    </main>
+    ${journalFooter(site)}
+  `;
+  activateMenu();
+}
+
 /* =========================================================
    ROUTER
 ========================================================= */
@@ -1553,6 +1691,8 @@ async function start() {
     else await journalHome();
   } else if (projectSlug) {
     await project(projectSlug);
+  } else if (window.location.pathname.startsWith("/portfolio")) {
+    await portfolioHome();
   } else {
     await home();
   }
