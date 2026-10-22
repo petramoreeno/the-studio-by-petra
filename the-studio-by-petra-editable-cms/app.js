@@ -143,6 +143,10 @@ function menu(siteTitle = "The Studio by Petra") {
             Work
           </a>
 
+          <a href="/journal/">
+            Journal
+          </a>
+
           <a href="/#about">
             About
           </a>
@@ -1393,6 +1397,115 @@ async function project(slug) {
 
 
 /* =========================================================
+   JOURNAL — EDITORIAL MAGAZINE
+========================================================= */
+
+function journalFooter(site) {
+  return `<footer class="footer"><div class="wrap footer-inner">
+    <div>${escapeHTML(site?.siteTitle || "The Studio by Petra")}</div>
+    <div>${escapeHTML(site?.copyright || "© 2026 Petra Moreno")}</div>
+  </div></footer>`;
+}
+
+function journalDate(date) {
+  if (!date) return "";
+  const value = new Date(`${String(date).slice(0,10)}T12:00:00`);
+  return Number.isNaN(value.getTime()) ? "" : value.toLocaleDateString("en-GB", {
+    day: "numeric", month: "long", year: "numeric"
+  });
+}
+
+function journalCard(post, featured = false) {
+  const url = `/journal/?post=${encodeURIComponent(post.slug)}`;
+  return `<article class="journal-card ${featured ? "journal-card-featured" : ""}">
+    <a href="${url}" class="journal-card-link">
+      <div class="journal-card-photo">
+        ${post.cover ? `<img src="${escapeHTML(post.cover)}" alt="${escapeHTML(post.coverAlt || post.title || "")}" loading="lazy">` : `<div class="journal-image-placeholder">THE STUDIO JOURNAL</div>`}
+      </div>
+      <div class="journal-card-meta">${escapeHTML(post.category || "Journal")} <span>·</span> ${escapeHTML(journalDate(post.date))}</div>
+      <h2>${escapeHTML(post.title || "Untitled")}</h2>
+      ${post.excerpt ? `<p>${escapeHTML(post.excerpt)}</p>` : ""}
+      <span class="journal-read-more">Read the story ↗</span>
+    </a>
+  </article>`;
+}
+
+async function journalHome() {
+  const app = document.getElementById("app");
+  const [site, index] = await Promise.all([
+    loadSite(),
+    getJSON(["/content/journal/index.json"])
+  ]);
+  if (site) setTheme(site);
+  const posts = Array.isArray(index) ? index.filter(post => post.published !== false) : [];
+  posts.sort((a,b) => String(b.date || "").localeCompare(String(a.date || "")));
+  const [first, ...rest] = posts;
+  app.innerHTML = `${menu(site?.siteTitle)}
+    <main class="journal-site">
+      <header class="journal-masthead wrap">
+        <a href="/" class="journal-home-link">← The Studio</a>
+        <div class="journal-kicker">THE STUDIO BY PETRA / A SPACE FOR STORIES</div>
+        <h1>Journal<span>.</span></h1>
+        <div class="journal-masthead-bottom"><span>Notes on creativity, identity, places & everything in between.</span><span>EST. 2026</span></div>
+      </header>
+      ${first ? `<section class="journal-feature wrap"><div class="journal-rule-label">01 / THE LATEST STORY</div>${journalCard(first, true)}</section>` : `
+        <section class="journal-empty wrap"><div class="journal-rule-label">ISSUE 001 / COMING TO LIFE</div>
+          <h2>A place for the things worth writing down.</h2>
+          <p>Stories, thoughts, photographs and everything in between. The first story is coming soon.</p>
+        </section>`}
+      ${rest.length ? `<section class="journal-latest wrap"><div class="journal-rule-label">MORE FROM THE JOURNAL</div><div class="journal-grid">${rest.map(post => journalCard(post)).join("")}</div></section>` : ""}
+      <div class="journal-signoff wrap">A collection of thoughts, made with curiosity.</div>
+    </main>${journalFooter(site)}`;
+  activateMenu();
+}
+
+function journalBodyBlocks(post) {
+  const blocks = Array.isArray(post.blocks) ? post.blocks : [];
+  return blocks.map(block => {
+    if (!block) return "";
+    const type = block.layout || "text";
+    if (type === "image") {
+      return block.image ? `<figure class="journal-article-figure"><img src="${escapeHTML(block.image)}" alt="${escapeHTML(block.alt || "")}" loading="lazy">${block.caption ? `<figcaption>${escapeHTML(block.caption)}</figcaption>` : ""}</figure>` : "";
+    }
+    if (type === "quote") {
+      return block.text ? `<blockquote class="journal-pullquote">“${escapeHTML(block.text)}”</blockquote>` : "";
+    }
+    if (type === "gallery") {
+      const images = Array.isArray(block.images) ? block.images.filter(x => x?.image) : [];
+      return `<div class="journal-photo-grid">${images.map(x => `<figure><img src="${escapeHTML(x.image)}" alt="${escapeHTML(x.alt || "")}" loading="lazy">${x.caption ? `<figcaption>${escapeHTML(x.caption)}</figcaption>` : ""}</figure>`).join("")}</div>`;
+    }
+    return `<section class="journal-article-section">${block.heading ? `<h2>${escapeHTML(block.heading)}</h2>` : ""}${block.text ? `<div class="journal-article-prose">${paragraphText(block.text)}</div>` : ""}</section>`;
+  }).join("");
+}
+
+async function journalPost(slug) {
+  const app = document.getElementById("app");
+  const [site, post] = await Promise.all([
+    loadSite(),
+    getJSON([`/content/journal/posts/${encodeURIComponent(slug)}.json`])
+  ]);
+  if (site) setTheme(site);
+  if (!post || post.published === false) {
+    app.innerHTML = `${menu(site?.siteTitle)}<main class="journal-missing wrap"><h1>Story not found.</h1><a href="/journal/">← Back to Journal</a></main>${journalFooter(site)}`;
+    activateMenu(); return;
+  }
+  document.title = `${post.title || "Journal"} — The Studio by Petra`;
+  app.innerHTML = `${menu(site?.siteTitle)}<main class="journal-site journal-article">
+    <header class="journal-article-head wrap">
+      <a href="/journal/" class="journal-home-link">← All stories</a>
+      <div class="journal-card-meta">${escapeHTML(post.category || "Journal")} <span>·</span> ${escapeHTML(journalDate(post.date))}</div>
+      <h1>${escapeHTML(post.title || "Untitled")}</h1>
+      ${post.excerpt ? `<p class="journal-article-deck">${escapeHTML(post.excerpt)}</p>` : ""}
+      <div class="journal-byline">WORDS & IMAGES / PETRA</div>
+    </header>
+    ${post.cover ? `<figure class="journal-article-cover"><img src="${escapeHTML(post.cover)}" alt="${escapeHTML(post.coverAlt || post.title || "")}">${post.coverCaption ? `<figcaption>${escapeHTML(post.coverCaption)}</figcaption>` : ""}</figure>` : ""}
+    <div class="journal-article-body">${journalBodyBlocks(post)}</div>
+    <div class="journal-article-end wrap"><a href="/journal/">← Back to Journal</a></div>
+  </main>${journalFooter(site)}`;
+  activateMenu();
+}
+
+/* =========================================================
    ROUTER
 ========================================================= */
 
@@ -1406,7 +1519,11 @@ async function start() {
     params.get("project");
 
 
-  if (projectSlug) {
+  if (window.location.pathname.startsWith("/journal")) {
+    const postSlug = params.get("post");
+    if (postSlug) await journalPost(postSlug);
+    else await journalHome();
+  } else if (projectSlug) {
     await project(projectSlug);
   } else {
     await home();
