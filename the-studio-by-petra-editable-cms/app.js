@@ -963,6 +963,34 @@ async function home() {
     </header>
 
 
+    <section class="home-pathways" aria-label="Explore The Studio">
+      <div class="wrap">
+        <div class="home-pathways-intro">
+          <span class="home-pathways-eyebrow">TWO SIDES OF THE STUDIO</span>
+          <p>What brings you here?</p>
+        </div>
+        <div class="home-pathways-grid">
+          <a class="home-pathway home-pathway-portfolio" href="/#projects" aria-label="Explore the portfolio">
+            <span class="home-pathway-number">01 / THE WORK</span>
+            <span class="home-pathway-bottom">
+              <span class="home-pathway-title">Portfolio</span>
+              <span class="home-pathway-description">Ideas, projects &amp; creative work.</span>
+              <span class="home-pathway-arrow" aria-hidden="true">↗</span>
+            </span>
+          </a>
+          <a class="home-pathway home-pathway-journal" href="/journal/" aria-label="Explore the journal">
+            <span class="home-pathway-number">02 / THE STORIES</span>
+            <span class="home-pathway-bottom">
+              <span class="home-pathway-title">Journal</span>
+              <span class="home-pathway-description">Notes on life, places &amp; everything in between.</span>
+              <span class="home-pathway-arrow" aria-hidden="true">↗</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
     <section class="statement">
 
       <div class="wrap statement-inner">
