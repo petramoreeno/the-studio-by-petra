@@ -756,7 +756,7 @@ button {
 }
 
 
-/* PROJECT INTRODUCTION — JUSTIFIED */
+/* PROJECT INTRODUCTION â€” JUSTIFIED */
 
 .case-intro {
   max-width: 700px;
@@ -837,7 +837,7 @@ button {
 }
 
 
-/* MAIN CASE-STUDY TEXT — JUSTIFIED */
+/* MAIN CASE-STUDY TEXT â€” JUSTIFIED */
 
 .case-copy {
   font-size: 16px;
@@ -1191,7 +1191,7 @@ button {
 }
 
 
-/* Feature paragraph — JUSTIFIED */
+/* Feature paragraph â€” JUSTIFIED */
 
 .case-feature-copy {
   max-width: 700px;
@@ -1701,4 +1701,75 @@ button {
     font-size: 30px;
   }
 
+}
+
+/* =========================================================
+   JOURNAL â€” EDITORIAL MAGAZINE (isolated styles)
+========================================================= */
+.journal-site { background:var(--cream); min-height:80vh; }
+.journal-masthead { padding-top:115px; padding-bottom:48px; }
+.journal-home-link { display:inline-block; font-size:11px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:72px; }
+.journal-kicker, .journal-rule-label, .journal-byline { font-size:10px; letter-spacing:.15em; text-transform:uppercase; }
+.journal-masthead h1 { font:400 clamp(110px,18vw,250px)/.88 var(--display),Georgia,serif; letter-spacing:-.065em; margin:22px 0 40px; }
+.journal-masthead h1 span { color:var(--mustard); }
+.journal-masthead-bottom { border-top:1px solid currentColor; padding-top:17px; display:flex; justify-content:space-between; gap:20px; font-size:12px; line-height:1.7; }
+.journal-feature, .journal-latest { padding-bottom:105px; }
+.journal-rule-label { border-top:1px solid rgba(122,76,77,.4); padding:15px 0 28px; }
+.journal-card-link { display:block; }
+.journal-card-photo { overflow:hidden; background:var(--mustard); aspect-ratio:4/3; }
+.journal-card-photo img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+.journal-card-link:hover img { transform:scale(1.025); }
+.journal-image-placeholder { height:100%; display:grid; place-items:center; font:400 clamp(24px,3vw,44px) var(--display),serif; letter-spacing:.02em; }
+.journal-card-meta { font-size:10px; text-transform:uppercase; letter-spacing:.12em; margin:23px 0 18px; }
+.journal-card-meta span { margin:0 8px; }
+.journal-card h2 { font:400 clamp(35px,4vw,60px)/1.05 var(--display),Georgia,serif; letter-spacing:-.035em; margin:0 0 18px; }
+.journal-card p { font-size:14px; line-height:1.8; max-width:560px; }
+.journal-read-more { display:inline-block; margin-top:16px; border-bottom:1px solid currentColor; padding-bottom:6px; font-size:11px; text-transform:uppercase; letter-spacing:.1em; }
+.journal-card-featured .journal-card-link { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr); column-gap:6%; align-items:center; }
+.journal-card-featured .journal-card-photo { grid-row:1/6; aspect-ratio:4/5; }
+.journal-card-featured h2 { font-size:clamp(50px,5.5vw,85px); }
+.journal-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:75px 28px; }
+.journal-empty { padding:75px 0 150px; }
+.journal-empty h2 { max-width:850px; font:400 clamp(50px,7vw,100px)/1 var(--display),serif; letter-spacing:-.04em; }
+.journal-empty p { max-width:550px; line-height:1.8; }
+.journal-signoff { padding:35px 0 85px; font:italic 24px var(--display),serif; text-align:center; }
+.journal-article-head { padding-top:115px; padding-bottom:60px; }
+.journal-article-head .journal-home-link { margin-bottom:70px; }
+.journal-article-head h1 { max-width:1080px; font:400 clamp(55px,8vw,125px)/.96 var(--display),Georgia,serif; letter-spacing:-.045em; margin:0 0 30px; }
+.journal-article-deck { max-width:720px; font:400 clamp(22px,2.5vw,35px)/1.4 var(--display),serif; }
+.journal-byline { margin-top:45px; }
+.journal-article-cover { width:min(92%,1450px); margin:0 auto 100px; }
+.journal-article-cover img { width:100%; max-height:800px; object-fit:cover; }
+.journal-article-cover figcaption,.journal-article-figure figcaption,.journal-photo-grid figcaption { font-size:10px; letter-spacing:.1em; text-transform:uppercase; line-height:1.6; margin-top:12px; }
+.journal-article-body { padding-bottom:50px; }
+.journal-article-section { width:min(84%,760px); margin:0 auto 65px; }
+.journal-article-section h2 { font:400 clamp(35px,4vw,56px)/1.1 var(--display),serif; margin:0 0 30px; }
+.journal-article-prose { font-size:16px; line-height:2; text-align:justify; hyphens:auto; }
+.journal-article-prose p { margin:0 0 1.5em; }
+.journal-pullquote { width:min(84%,950px); margin:90px auto; padding:35px 0; border-top:1px solid currentColor; border-bottom:1px solid currentColor; font:italic 400 clamp(35px,5vw,68px)/1.2 var(--display),serif; text-align:center; }
+.journal-article-figure { width:min(92%,1200px); margin:90px auto; }
+.journal-article-figure img { width:100%; max-height:850px; object-fit:cover; }
+.journal-photo-grid { width:min(92%,1200px); margin:90px auto; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.journal-photo-grid figure { margin:0; }
+.journal-photo-grid img { width:100%; aspect-ratio:4/5; object-fit:cover; }
+.journal-article-end { padding:70px 0 120px; border-top:1px solid rgba(122,76,77,.4); font:400 30px var(--display),serif; }
+.journal-missing { min-height:70vh; padding-top:160px; }
+.journal-missing h1 { font:400 clamp(50px,8vw,100px) var(--display),serif; }
+@media(max-width:800px) {
+ .journal-card-featured .journal-card-link { display:block; }
+ .journal-card-featured .journal-card-photo { aspect-ratio:4/3; }
+ .journal-grid { grid-template-columns:1fr; gap:60px; }
+ .journal-masthead h1 { font-size:clamp(85px,19vw,160px); }
+}
+@media(max-width:720px) {
+ .journal-masthead,.journal-article-head { padding-top:95px; }
+ .journal-home-link { margin-bottom:48px; }
+ .journal-masthead-bottom { flex-direction:column; }
+ .journal-masthead h1 { font-size:clamp(70px,18vw,120px); }
+ .journal-article-head h1 { font-size:clamp(48px,12vw,75px); }
+ .journal-article-section { width:88%; }
+ .journal-article-prose { font-size:15px; text-align:left; hyphens:none; }
+ .journal-photo-grid { grid-template-columns:1fr; }
+ .journal-article-cover { width:100%; }
+ .journal-pullquote { font-size:36px; }
 }
