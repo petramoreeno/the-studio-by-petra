@@ -1800,3 +1800,15 @@ button {
   .home-pathway { min-height:270px; padding:24px; }
   .home-pathway-title { font-size:clamp(64px,16vw,95px); }
 }
+
+/* =========================================================
+   PORTFOLIO — DEDICATED PAGE
+========================================================= */
+.portfolio-page { min-height: 75vh; }
+.portfolio-masthead { padding-top: clamp(115px, 14vw, 190px); padding-bottom: clamp(45px, 7vw, 95px); }
+.portfolio-kicker { margin-top: 70px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+.portfolio-masthead h1 { font-family: 'Bodoni Moda', Georgia, serif; font-size: clamp(74px, 13vw, 180px); line-height: 1; letter-spacing: -.055em; margin: 15px 0 20px; font-weight: 400; }
+.portfolio-masthead h1 span { color: #7a4c4d; }
+.portfolio-masthead p { font-size: clamp(15px, 2vw, 21px); max-width: 620px; }
+.portfolio-page .projects { padding-top: 30px; padding-bottom: 110px; }
+@media (max-width: 700px) { .portfolio-kicker { margin-top: 40px; } .portfolio-page .projects { padding-bottom: 65px; } }
