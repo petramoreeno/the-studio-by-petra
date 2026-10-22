@@ -1812,3 +1812,12 @@ button {
 .portfolio-masthead p { font-size: clamp(15px, 2vw, 21px); max-width: 620px; }
 .portfolio-page .projects { padding-top: 30px; padding-bottom: 110px; }
 @media (max-width: 700px) { .portfolio-kicker { margin-top: 40px; } .portfolio-page .projects { padding-bottom: 65px; } }
+
+/* Journal — justified article text */
+.journal-article p,
+.journal-post p,
+.journal-article-body p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
